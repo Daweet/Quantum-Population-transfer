@@ -1,0 +1,14 @@
+function dydt= stirap(t,y)
+%solve the STIRAP example
+dydt =zeros (size(y));
+%parameters - and constants
+omegap=omega0*0.707*exp^(-((t-tau)^2)/(T^2)); 
+omegas=(omega0*exp^(-((t+tau)^2)/(T^2)))+(omega0*0.7*exp^(-((t-tau)^2)/(T^2))); 
+omega0=20/T; T=0.413e12; tau=0.7*T;
+A=y(1);
+B=y(2);
+C=y(3);
+%Evaluate the RHS expression
+dydt(1)=omegap*B;
+dydt(2)=omegap*A + omegas*C;
+dydt(3)=omegas*B;
